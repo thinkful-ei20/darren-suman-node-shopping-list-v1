@@ -1,3 +1,5 @@
+'use strict';
+
 const uuid = require('uuid');
 
 // this module provides volatile storage, using a `ShoppingList`
@@ -12,8 +14,8 @@ const uuid = require('uuid');
 
 
 function StorageException(message) {
-   this.message = message;
-   this.name = "StorageException";
+  this.message = message;
+  this.name = 'StorageException';
 }
 
 const ShoppingList = {
@@ -24,11 +26,11 @@ const ShoppingList = {
       id: uuid.v4(),
       budget: budget
     };
-    this.items[item.id] = item;
+    this.items[item.id] = item;    
     return item;
   },
   get: function() {
-    console.log('Retrieving shopping list items');
+    console.log('Retrieving shopping list items');    
     return Object.keys(this.items).map(key => this.items[key]);
   },
   delete: function(id) {
@@ -40,7 +42,7 @@ const ShoppingList = {
     const {id} = updatedItem;
     if (!(id in this.items)) {
       throw StorageException(
-        `Can't update item \`${id}\` because doesn't exist.`)
+        `Can't update item \`${id}\` because doesn't exist.`);
     }
     this.items[updatedItem.id] = updatedItem;
     return updatedItem;
@@ -77,7 +79,7 @@ const Recipes = {
     const {id} = updatedItem;
     if (!(id in this.items)) {
       throw StorageException(
-        `Can't update item \`${id}\` because doesn't exist.`)
+        `Can't update item \`${id}\` because doesn't exist.`);
     }
     this.items[updatedItem.id] = updatedItem;
     return updatedItem;
@@ -94,4 +96,4 @@ function createRecipes() {
 module.exports = {
   ShoppingList: createShoppingList(),
   Recipes: createRecipes()
-}
+};
